@@ -28,17 +28,17 @@ const Map1 = new Map([
   ["<code>","code{\n  "],
   ["</strong>","\n}"],
   ["</span>","\n}"],
-  ["</p>","\n}"],
-  ["</em>","\n}"],
-  ["</h1>","\n}"],
-  ["</h2>","\n}"],
-  ["</h3>","\n}"],
-  ["</div>","\n}"],
-  ["</h4>","\n}"],
-  ["</h5>","\n}"],
+  ["</p>","\n}p"],
+  ["</em>","\n}em"],
+  ["</h1>","\n}h1"],
+  ["</h2>","\n}h2"],
+  ["</h3>","\n}h3"],
+  ["</div>","\n}div"],
+  ["</h4>","\n}h4"],
+  ["</h5>","\n}h5"],
   ["</h6>","\n"],
-  ["</code>","\n}"],  
-  ["</blockquote>","\n}"],
+  ["</code>","\n}code"],  
+  ["</blockquote>","\n}block"],
   ["</sub>","\n}"],
   ["</sup>","\n}"],
   ["</s>","\n}"],
@@ -62,14 +62,13 @@ const Map1 = new Map([
   [">","\n{"],
 ]);
 
+const keysArray = [...Map1.keys()];
+const valuesArray = [...Map1.values()];
 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
-
 function replaceWords(content,Map1) {
-  const keysArray = [...Map1.keys()];
-  const valuesArray = [...Map1.values()];
   let resultString = content;
   for (let i = 0; i < keysArray.length; i++) {
     const escapedKey = escapeRegExp(keysArray[i]);
@@ -78,5 +77,15 @@ function replaceWords(content,Map1) {
   }
   console.log(resultString);
   return resultString;
-  
+}
+
+function html(content,Map1) {
+  let resultString = content;
+  for (let i = 0; i < keysArray.length; i++) {
+    const escapedKey = escapeRegExp(keysArray[i]);
+    const regex = new RegExp(escapedKey, 'gi');
+    resultString = resultString.replace(valuesArray[i], regex);
+  }
+  console.log(resultString);
+  return resultString;
 }

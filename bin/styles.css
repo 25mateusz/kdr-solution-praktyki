@@ -7,3 +7,15 @@
     margin: 0 auto;
 
 }
+#display2{
+    width: 80%;
+        min-height: 50px;
+        height: fit-content;
+     border: 1px solid rgb(191, 186, 186); 
+    padding: 20px; border-radius: 10px;
+    margin: 0 auto;
+
+}
+p{
+    word-wrap: break-word;
+}
